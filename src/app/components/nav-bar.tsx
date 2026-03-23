@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { IoIosLogOut } from "react-icons/io";
 
 type NavBarProps = {
   userName: string;
@@ -48,9 +49,9 @@ export default function NavBar({ userName,imageUrl, onSignOut }: NavBarProps) {
           {/* sign out */}
           <button
             onClick={onSignOut}
-            className="text-sm font-medium text-zinc-500 hover:text-zinc-900 transition-colors"
+            className=" text-red-500  transition-colors"
           >
-            Sign out
+            <IoIosLogOut className="w-6 h-6 font-bold" />
           </button>
         </div>
       </nav>
