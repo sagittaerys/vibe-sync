@@ -21,18 +21,17 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white flex">
       {/* left panel — branding */}
       <div className="hidden lg:flex w-1/2 bg-zinc-950 flex-col justify-between p-12">
-        <Link href="/" className="text-white font-semibold tracking-tight">
+        <Link href="/" className="text-white font-serif font-semibold tracking-tight">
           VibeSync
         </Link>
 
         <div>
           <h1
-            className="text-5xl font-bold text-white leading-[1.1] tracking-tight"
-            style={{ fontFamily: "var(--font-serif)" }}
+            className="text-5xl font-bold text-white leading-[1.1] tracking-tight font-serif"
           >
             Move your music.
             <br />
-            <span className="text-zinc-400">Keep your taste.</span>
+            <span className="text-zinc-400 font-serif">Keep your taste.</span>
           </h1>
           <p className="text-zinc-500 mt-4 text-sm leading-relaxed max-w-xs">
             Transfer playlists between Spotify and Apple Music — with AI that
@@ -59,7 +58,7 @@ export default function LoginPage() {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
-          <div className="lg:hidden text-zinc-950 font-semibold tracking-tight mb-10">
+          <div className="lg:hidden text-zinc-950 font-serif font-semibold tracking-tight mb-10">
             VibeSync
           </div>
 
