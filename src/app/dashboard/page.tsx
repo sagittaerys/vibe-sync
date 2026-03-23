@@ -6,6 +6,7 @@ import { authClient } from "@/src/lib/auth-client";
 import { FaSpotify } from "react-icons/fa";
 import NavBar from "../components/nav-bar";
 import { useTransferStore } from "@/src/store/transfer-store";
+import { FaCircleCheck } from "react-icons/fa6";
 
 type Playlist = {
   id: string;
@@ -168,7 +169,7 @@ export default function DashboardPage() {
                       {isSelected && (
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-xl">
                           <span className="text-white text-sm font-semibold">
-                            ✓
+                            <FaCircleCheck className="w-5 h-5 text-zinc-900 inline-block mr-1" />
                           </span>
                         </div>
                       )}
@@ -198,6 +199,34 @@ export default function DashboardPage() {
             </div>
           )}
         </div>
+
+        {/* bottom bar */}
+        {selectedIds.length > 0 && (
+          <div className="fixed bottom-0 left-0 w-full border-t border-zinc-200 bg-white">
+            <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+              <p className="text-sm font-serif text-zinc-700">
+                {selectedIds.length} playlist
+                {selectedIds.length > 1 ? "s" : ""} selected
+              </p>
+
+              <div className="flex items-center gap-3">
+                <button
+                  disabled
+                  className="px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg opacity-50 cursor-not-allowed"
+                >
+                  Transfer
+                </button>
+
+                <button
+                  onClick={clearIds}
+                  className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
