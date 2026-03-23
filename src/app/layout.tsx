@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import { Playfair_Display, DM_Sans } from "next/font/google";
+import { Playfair_Display, DM_Sans, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
 
 const playfair = Playfair_Display({
   variable: "--font-serif",
@@ -8,11 +9,7 @@ const playfair = Playfair_Display({
   weight: ["700"],
 });
 
-const dmSans = DM_Sans({
-  variable: "--font-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-});
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
   title: {
@@ -54,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${dmSans.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", playfair.variable, "font-sans", geist.variable)}
     >
       <body
         className="min-h-full flex flex-col font-sans"
