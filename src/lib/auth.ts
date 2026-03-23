@@ -13,6 +13,7 @@ export const auth = betterAuth({
         verification,
       }
     }),
+    trustedOrigins: ["https://sage-vibesync.vercel.app"],
     socialProviders: {
         spotify: { 
             clientId: process.env.SPOTIFY_CLIENT_ID as string, 
