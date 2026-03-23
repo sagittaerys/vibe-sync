@@ -1,15 +1,16 @@
 "use client";
-import { createAuthClient } from "better-auth/client"
-import { FaSpotify } from "react-icons/fa";
 
+import { FaSpotify } from "react-icons/fa";
+import { authClient } from "@/src/lib/auth-client";
 
 export default function LoginPage() {
-  const authClient =  createAuthClient()
+ 
 
-  const signIn = async () => {
-    const data = await authClient.signIn.social({
-        provider: "spotify"
-    })
+ const signIn = async () => {
+  await authClient.signIn.social({
+    provider: "spotify",
+    callbackURL: "/dashboard"
+  })
 }
 
   return (
