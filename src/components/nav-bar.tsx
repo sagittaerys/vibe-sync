@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { IoIosLogOut } from "react-icons/io";
-import Image from "next/image";
+
 
 type NavBarProps = {
   userName: string;
@@ -18,8 +18,8 @@ export default function NavBar({ userName, imageUrl, onSignOut }: NavBarProps) {
         {/* Brand */}
 
         <Link href="/">
-          <span className="font-bold font-serif text-xl text-zinc-900">VibeSync</span>
-</Link>
+         <span className="font-bold text-xl font-serif text-zinc-900">VibeSync</span>
+        </Link>
 
         {/* details and cta */}
         <div className="flex items-center gap-4">
