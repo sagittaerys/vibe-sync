@@ -8,7 +8,7 @@ type NavBarProps = {
   onSignOut: () => void;
 };
 
-export default function NavBar({ userName,imageUrl, onSignOut }: NavBarProps) {
+export default function NavBar({ userName, imageUrl, onSignOut }: NavBarProps) {
   const initial = userName?.[0]?.toUpperCase() || "?";
 
   return (
@@ -49,9 +49,10 @@ export default function NavBar({ userName,imageUrl, onSignOut }: NavBarProps) {
           {/* sign out */}
           <button
             onClick={onSignOut}
-            className=" text-red-500  transition-colors"
+            title="Sign out"
+            className="text-red-500 transition-colors hover:text-red-700"
           >
-            <IoIosLogOut className="w-6 h-6 font-bold" />
+            <IoIosLogOut className="w-6 h-6" />
           </button>
         </div>
       </nav>
