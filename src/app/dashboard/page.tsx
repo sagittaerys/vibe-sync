@@ -69,7 +69,7 @@ export default function DashboardPage() {
         }
       />
 
-      <main className="max-w-5xl mx-auto px-6 py-10 space-y-10">
+      <main className="max-w-5xl mx-auto px-6 py-10 space-y-10 pb-24">
         {/* Hero */}
         <div className="space-y-1">
           <h1 className="font-serif text-4xl font-bold text-zinc-950 tracking-tight">
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                       {isSelected && (
                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-xl">
                           <span className="text-white text-sm font-semibold">
-                            <FaCircleCheck className="w-5 h-5 text-zinc-900 inline-block mr-1" />
+                            <FaCircleCheck className="w-5 h-5 text-white inline-block mr-1" />
                           </span>
                         </div>
                       )}
@@ -202,7 +202,7 @@ export default function DashboardPage() {
 
         {/* bottom bar */}
         {selectedIds.length > 0 && (
-          <div className="fixed bottom-0 left-0 w-full border-t border-zinc-200 bg-white">
+          <div className="fixed bottom-0 left-0 w-full border-t border-zinc-200  bg-white">
             <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
               <p className="text-sm font-serif text-zinc-700">
                 {selectedIds.length} playlist
