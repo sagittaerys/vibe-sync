@@ -45,7 +45,7 @@ export default function LoginPage() {
             <FaSpotify className="w-3.5 h-3.5 text-green-400" />
             <span className="text-zinc-400 text-xs">Spotify</span>
           </div>
-          <div className="text-zinc-700 text-xs">↔</div>
+          <div className="text-zinc-500 text-xs">↔</div>
 
           <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full">
             <BsAppleMusic className="w-3.5 h-3.5 text-red-400" />
@@ -58,7 +58,7 @@ export default function LoginPage() {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-sm">
           {/* Mobile logo */}
-          <div className="lg:hidden text-zinc-950 font-serif font-semibold tracking-tight mb-10">
+          <div className="lg:hidden text-2xl text-zinc-950 font-serif font-semibold tracking-tight mb-10">
             VibeSync
           </div>
 
@@ -89,13 +89,7 @@ export default function LoginPage() {
               // disabled
               className="w-full flex items-center gap-3 px-4 py-3.5 bg-white border border-zinc-200 text-zinc-300 rounded-xl cursor-not-allowed"
             >
-              <svg
-                className="w-5 h-5 flex-shrink-0"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" />
-              </svg>
+              <BsAppleMusic className="w-5 h-5 flex-shrink-0" />
               <span className="text-sm font-medium">
                 Continue with Apple Music
               </span>
