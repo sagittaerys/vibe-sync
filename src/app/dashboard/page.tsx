@@ -5,6 +5,8 @@ import { useRouter } from "next/navigation";
 import { authClient } from "@/src/lib/auth-client";
 import { FaSpotify } from "react-icons/fa";
 import NavBar from "../components/nav-bar";
+import { useTransferStore } from "@/src/store/transfer-store";
+import { FaCircleCheck } from "react-icons/fa6";
 
 type Playlist = {
   id: string;
@@ -19,6 +21,7 @@ export default function DashboardPage() {
   const [playlists, setPlaylists] = useState<Playlist[]>([]);
   const [loadingPlaylists, setLoadingPlaylists] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { selectedIds, toggleId, clearIds } = useTransferStore();
 
   useEffect(() => {
     if (!isPending && !session) router.push("/login");
@@ -41,7 +44,7 @@ export default function DashboardPage() {
     };
     fetchPlaylists();
   }, [session]);
-  
+
   if (isPending) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
@@ -49,7 +52,7 @@ export default function DashboardPage() {
       </div>
     );
   }
-  
+
   // console.log(session);
   if (!session) return null;
 
@@ -135,43 +138,95 @@ export default function DashboardPage() {
           {/* Grid */}
           {!loadingPlaylists && !error && playlists.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-              {playlists.map((playlist) => (
-                <button key={playlist.id} className="group text-left space-y-2">
-                  {/* Artwork */}
-                  <div className="aspect-square rounded-xl overflow-hidden bg-zinc-100 relative">
-                    {playlist.images?.[0]?.url ? (
-                      <img
-                        src={playlist.images[0].url}
-                        alt={playlist.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <FaSpotify className="w-8 h-8 text-zinc-300" />
-                      </div>
-                    )}
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 rounded-xl flex items-center justify-center">
-                      <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                        Select
-                      </span>
-                    </div>
-                  </div>
+              {playlists.map((playlist) => {
+                const isSelected = selectedIds.includes(playlist.id);
 
-                  {/* Info */}
-                  <div>
-                    <p className="text-sm font-medium text-zinc-900 truncate">
-                      {playlist.name}
-                    </p>
-                    <p className="text-xs text-zinc-400">
-                      {playlist.tracks?.total} tracks
-                    </p>
-                  </div>
-                </button>
-              ))}
+                return (
+                  <button
+                    key={playlist.id}
+                    onClick={() => toggleId(playlist.id)}
+                    className="group text-left space-y-2"
+                  >
+                    {/* artwork */}
+                    <div
+                      className={`aspect-square rounded-xl overflow-hidden bg-zinc-100 relative transition-all ${
+                        isSelected ? "ring-2 ring-zinc-900" : ""
+                      }`}
+                    >
+                      {playlist.images?.[0]?.url ? (
+                        <img
+                          src={playlist.images[0].url}
+                          alt={playlist.name}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center">
+                          <FaSpotify className="w-8 h-8 text-zinc-300" />
+                        </div>
+                      )}
+
+                      {/* Selected overlay */}
+                      {isSelected && (
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center rounded-xl">
+                          <span className="text-white text-sm font-semibold">
+                            <FaCircleCheck className="w-5 h-5 text-zinc-900 inline-block mr-1" />
+                          </span>
+                        </div>
+                      )}
+
+                      {/* Hover overlay */}
+                      {!isSelected && (
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 rounded-xl flex items-center justify-center">
+                          <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                            Select
+                          </span>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Info */}
+                    <div>
+                      <p className="text-sm font-medium text-zinc-900 truncate">
+                        {playlist.name}
+                      </p>
+                      <p className="text-xs text-zinc-400">
+                        {playlist.tracks?.total} tracks
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           )}
         </div>
+
+        {/* bottom bar */}
+        {selectedIds.length > 0 && (
+          <div className="fixed bottom-0 left-0 w-full border-t border-zinc-200 bg-white">
+            <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+              <p className="text-sm font-serif text-zinc-700">
+                {selectedIds.length} playlist
+                {selectedIds.length > 1 ? "s" : ""} selected
+              </p>
+
+              <div className="flex items-center gap-3">
+                <button
+                  disabled
+                  className="px-4 py-2 bg-zinc-900 text-white text-sm font-medium rounded-lg opacity-50 cursor-not-allowed"
+                >
+                  Transfer
+                </button>
+
+                <button
+                  onClick={clearIds}
+                  className="text-sm text-zinc-500 hover:text-zinc-900 transition-colors"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
