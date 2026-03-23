@@ -13,7 +13,7 @@ export const auth = betterAuth({
         verification,
       }
     }),
-    trustedOrigins: ["https://sage-vibesync.vercel.app"],
+    trustedOrigins: ["https://sage-vibesync.vercel.app", "http://127.0.0.1:3000"],
     advanced: {
       crossSubdomainCookies: {
         enabled: false,
@@ -27,6 +27,7 @@ export const auth = betterAuth({
         spotify: { 
             clientId: process.env.SPOTIFY_CLIENT_ID as string, 
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string, 
-            scope: ["user-read-email", "playlist-read-private", "playlist-read-collaborative"],        }, 
+            scope: ["user-read-email", "playlist-read-private", "playlist-read-collaborative","user-library-read"],
+                  }, 
     },
 })
