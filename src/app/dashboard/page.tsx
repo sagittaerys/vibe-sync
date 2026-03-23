@@ -1,5 +1,5 @@
 "use client";
-
+import TransferModal from "../../components/transfer-modal";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/src/lib/auth-client";
@@ -29,6 +29,7 @@ export default function DashboardPage() {
   const [error, setError] = useState<string | null>(null);
   const { selectedIds, toggleId, clearIds } = useTransferStore();
   const [likedSongs, setLikedSongs] = useState<LikedSongs | null>(null);
+  const [showTransferModal, setShowTransferModal] = useState(false);
 
   useEffect(() => {
     if (!isPending && !session) router.push("/login");
@@ -91,7 +92,6 @@ export default function DashboardPage() {
       />
 
       <main className="max-w-5xl mx-auto px-6 py-10 space-y-10 pb-28">
-
         {/* hero */}
         <div className="space-y-1">
           <h1 className="font-serif text-4xl font-bold text-zinc-950 tracking-tight">
@@ -111,10 +111,10 @@ export default function DashboardPage() {
             </p>
           </div>
           <button
-            disabled
-            className="flex-shrink-0 px-4 py-2 bg-white/10 text-zinc-500 text-sm font-medium rounded-xl cursor-not-allowed border border-white/10"
+            // onClick={() => setShowTransferModal(true)}
+            className="flex-shrink-0 px-4 py-2 bg-white text-zinc-500 text-sm font-medium rounded-xl cursor-pointer border border-white/10"
           >
-            Coming soon
+            Transfer
           </button>
         </div>
 
@@ -160,45 +160,47 @@ export default function DashboardPage() {
           {/* Grid */}
           {!isLoading && !error && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-
               {/* liked songs */}
-              {likedSongs && (() => {
-                const isSelected = selectedIds.includes(likedSongs.id);
-                return (
-                  <button
-                    onClick={() => toggleId(likedSongs.id)}
-                    className="group text-left space-y-2"
-                  >
-                    <div className={`aspect-square rounded-xl relative overflow-hidden transition-all ${
-                      isSelected ? "ring-2 ring-zinc-900" : ""
-                    }`}>
-                      <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center">
-                        <FaHeart className="w-10 h-10 text-white/80" />
+              {likedSongs &&
+                (() => {
+                  const isSelected = selectedIds.includes(likedSongs.id);
+                  return (
+                    <button
+                      onClick={() => toggleId(likedSongs.id)}
+                      className="group text-left space-y-2"
+                    >
+                      <div
+                        className={`aspect-square rounded-xl relative overflow-hidden transition-all ${
+                          isSelected ? "ring-2 ring-zinc-900" : ""
+                        }`}
+                      >
+                        <div className="w-full h-full bg-gradient-to-br from-pink-400 to-purple-600 flex items-center justify-center">
+                          <FaHeart className="w-10 h-10 text-white/80" />
+                        </div>
+                        {isSelected && (
+                          <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                            <FaCircleCheck className="w-6 h-6 text-white" />
+                          </div>
+                        )}
+                        {!isSelected && (
+                          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
+                            <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
+                              Select
+                            </span>
+                          </div>
+                        )}
                       </div>
-                      {isSelected && (
-                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                          <FaCircleCheck className="w-6 h-6 text-white" />
-                        </div>
-                      )}
-                      {!isSelected && (
-                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-200 flex items-center justify-center">
-                          <span className="text-white text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity">
-                            Select
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-zinc-900 truncate">
-                        {likedSongs.name}
-                      </p>
-                      <p className="text-xs text-zinc-400">
-                        {likedSongs.total} tracks
-                      </p>
-                    </div>
-                  </button>
-                );
-              })()}
+                      <div>
+                        <p className="text-sm font-medium text-zinc-900 truncate">
+                          {likedSongs.name}
+                        </p>
+                        <p className="text-xs text-zinc-400">
+                          {likedSongs.total} tracks
+                        </p>
+                      </div>
+                    </button>
+                  );
+                })()}
 
               {/* playlists */}
               {playlists.map((playlist) => {
@@ -209,9 +211,11 @@ export default function DashboardPage() {
                     onClick={() => toggleId(playlist.id)}
                     className="group text-left space-y-2"
                   >
-                    <div className={`aspect-square rounded-xl overflow-hidden bg-zinc-100 relative transition-all ${
-                      isSelected ? "ring-2 ring-zinc-900" : ""
-                    }`}>
+                    <div
+                      className={`aspect-square rounded-xl overflow-hidden bg-zinc-100 relative transition-all ${
+                        isSelected ? "ring-2 ring-zinc-900" : ""
+                      }`}
+                    >
                       {playlist.images?.[0]?.url ? (
                         <img
                           src={playlist.images[0].url}
@@ -254,10 +258,12 @@ export default function DashboardPage() {
 
       {/* bottom bar */}
       {selectedIds.length > 0 && (
-        <div className="fixed bottom-0 left-0 w-full border-t border-zinc-100 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+        <div className="fixed bottom-0 left-0 w-full border-t border-zinc-100 bg-white ">
           <div className="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
             <p className="text-sm text-zinc-600">
-              <span className="font-semibold text-zinc-950">{selectedIds.length}</span>{" "}
+              <span className="font-semibold font-serif text-zinc-950">
+                {selectedIds.length}
+              </span>{" "}
               {selectedIds.length === 1 ? "playlist" : "playlists"} selected
             </p>
             <div className="flex items-center gap-3">
@@ -268,8 +274,8 @@ export default function DashboardPage() {
                 Clear
               </button>
               <button
-                disabled
-                className="px-5 py-2 bg-zinc-950 text-white text-sm font-medium rounded-xl opacity-40 cursor-not-allowed"
+                onClick={() => setShowTransferModal(true)}
+                className="px-5 py-2 bg-zinc-950 text-white text-sm font-medium rounded-xl hover:bg-zinc-800 transition-colors"
               >
                 Transfer
               </button>
@@ -277,6 +283,17 @@ export default function DashboardPage() {
           </div>
         </div>
       )}
+
+      {/* transfer modal */}
+
+      <TransferModal
+        open={showTransferModal}
+        onOpenChange={setShowTransferModal}
+        playlistCount={selectedIds.length}
+        onConfirm={(platform) => {
+          console.log("Transfer to:", platform, selectedIds);
+        }}
+      />
     </div>
   );
 }

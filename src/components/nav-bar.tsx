@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { IoIosLogOut } from "react-icons/io";
-import Image from "next/image";
+
 
 type NavBarProps = {
   userName: string;
@@ -14,11 +14,11 @@ export default function NavBar({ userName, imageUrl, onSignOut }: NavBarProps) {
 
   return (
     <header className="w-full border-b border-zinc-100 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-      <nav className="max-w-5xl mx-auto px-4 py-2 flex items-center justify-between">
+      <nav className="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
         {/* Brand */}
 
         <Link href="/">
-          <Image src="/vibe-sync.png" className="border border-red-400" alt="VibeSync" width={170} height={30} />
+         <span className="font-bold text-xl font-serif text-zinc-900">VibeSync</span>
         </Link>
 
         {/* details and cta */}
