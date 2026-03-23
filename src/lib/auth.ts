@@ -14,6 +14,15 @@ export const auth = betterAuth({
       }
     }),
     trustedOrigins: ["https://sage-vibesync.vercel.app"],
+    advanced: {
+      crossSubdomainCookies: {
+        enabled: false,
+      },
+      defaultCookieAttributes: {
+        secure: true,
+        sameSite: "none",
+      }
+    },
     socialProviders: {
         spotify: { 
             clientId: process.env.SPOTIFY_CLIENT_ID as string, 
