@@ -15,6 +15,7 @@ import { FaDeezer } from "react-icons/fa6";
 import { FaSoundcloud } from "react-icons/fa6";
 import { FaCircleCheck } from "react-icons/fa6";
 import { BsAppleMusic } from "react-icons/bs";
+import { authClient } from "@/src/lib/auth-client";
 
 type Platform = "deezer" | "youtube" | "apple" | "soundcloud";
 
@@ -35,11 +36,40 @@ export default function TransferModal({
     null,
   );
 
-  const handleConfirm = () => {
+const handleConfirm = async () => {
     if (!selectedPlatform) return;
-    onConfirm(selectedPlatform);
-    onOpenChange(false);
+    
+    //  the idea being the function is to make the provider dynamic without hardcoding a single provider later down the line if the others are online... you grab??
+    const platformToProvider: Record<Platform, string> = {
+      youtube: "google",
+      apple: "apple",
+      deezer: "deezer",
+      soundcloud: "soundcloud",
+    };
+
+    const provider = platformToProvider[selectedPlatform];
+
+    try {
+      // Check if the user has already linked this provider
+      const res = await fetch(`/api/auth/check-link?provider=${provider}`);
+      const data = await res.json();
+
+      if (!data.isLinked) {
+        
+        await authClient.signIn.social({
+          provider: provider,
+          callbackURL: window.location.href, 
+        });
+      } else {
+      
+        onConfirm(selectedPlatform);
+        onOpenChange(false);
+      }
+    } catch (error) {
+      console.error("Failed to check provider link:", error);
+    }
   };
+
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
