@@ -39,7 +39,7 @@ export default function LoginPage() {
             <span className="text-zinc-400 font-serif">Keep your taste.</span>
           </h1>
           <p className="text-zinc-500 mt-4 text-sm leading-relaxed max-w-xs">
-            Transfer playlists across Spotify, Apple Music, Deezer and more —
+            Transfer playlists across Spotify, Deezer, SoundCloud, Apple Music and more —
             with AI that finds every track.
           </p>
         </div>
@@ -68,6 +68,18 @@ export default function LoginPage() {
           <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
             <FaYoutube className="w-3.5 h-3.5 text-red-700 " />
             <span className="text-zinc-900 text-xs">YouTube Music</span>
+          </div>
+          <div className="text-zinc-500 text-xs">↔</div>
+
+          <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
+            <FaYoutube className="w-3.5 h-3.5 text-red-700 " />
+            <span className="text-zinc-900 text-xs">YouTube Music</span>
+          </div>
+          <div className="text-zinc-500 text-xs">↔</div>
+
+          <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
+            <FaSoundcloud className="w-3.5 h-3.5 text-orange-500 " />
+            <span className="text-zinc-900 text-xs">SoundCloud</span>
           </div>
         </div>
       </div>
