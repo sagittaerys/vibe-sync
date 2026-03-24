@@ -4,8 +4,7 @@ import { useState } from "react";
 import { FaSpotify } from "react-icons/fa";
 import { BsAppleMusic } from "react-icons/bs";
 import { FaDeezer } from "react-icons/fa6";
-import { FaSoundcloud } from "react-icons/fa6";
-import { FaYoutube } from "react-icons/fa";
+import PlatformMarquee from "../../components/marquee"
 
 import Link from "next/link";
 import { authClient } from "@/src/lib/auth-client";
@@ -45,43 +44,7 @@ export default function LoginPage() {
         </div>
 
         {/* platform pills */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-white/10 rounded-full">
-            <FaSpotify className="w-3.5 h-3.5 text-green-400" />
-            <span className="text-zinc-900 text-xs">Spotify</span>
-          </div>
-
-          <div className="text-zinc-500 text-xs">↔</div>
-
-          <div className="flex items-center bg-white gap-2 px-3 py-1.5 border border-white/10 rounded-full">
-            <BsAppleMusic className="w-3.5 h-3.5 text-red-400" />
-            <span className="text-zinc-900 text-xs">Apple Music</span>
-          </div>
-          <div className="text-zinc-500 text-xs">↔</div>
-
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-white/10 rounded-full">
-            <FaDeezer className="w-3.5 h-3.5 text-purple-400 " />
-            <span className="text-zinc-900 text-xs">Deezer</span>
-          </div>
-          <div className="text-zinc-500 text-xs">↔</div>
-
-          <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
-            <FaYoutube className="w-3.5 h-3.5 text-red-700 " />
-            <span className="text-zinc-900 text-xs">YouTube Music</span>
-          </div>
-          <div className="text-zinc-500 text-xs">↔</div>
-
-          <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
-            <FaYoutube className="w-3.5 h-3.5 text-red-700 " />
-            <span className="text-zinc-900 text-xs">YouTube Music</span>
-          </div>
-          <div className="text-zinc-500 text-xs">↔</div>
-
-          <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
-            <FaSoundcloud className="w-3.5 h-3.5 text-orange-500 " />
-            <span className="text-zinc-900 text-xs">SoundCloud</span>
-          </div>
-        </div>
+        <PlatformMarquee />
       </div>
 
       {/* Right panel — auth */}

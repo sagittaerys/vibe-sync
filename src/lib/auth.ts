@@ -29,5 +29,15 @@ export const auth = betterAuth({
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET as string, 
             scope: ["user-read-email", "playlist-read-private", "playlist-read-collaborative","user-library-read"],
                   }, 
+         google: { 
+            clientId: process.env.GOOGLE_CLIENT_ID as string, 
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET as string, 
+            scope: [
+        "https://www.googleapis.com/auth/userinfo.profile",
+        "https://www.googleapis.com/auth/userinfo.email",
+        "https://www.googleapis.com/auth/youtube", 
+        "https://www.googleapis.com/auth/youtube.force-ssl" 
+    ],
+        }, 
     },
 })

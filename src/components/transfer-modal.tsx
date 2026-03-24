@@ -15,7 +15,7 @@ import { FaDeezer } from "react-icons/fa6";
 import { FaSoundcloud } from "react-icons/fa6";
 import { FaCircleCheck } from "react-icons/fa6";
 import { BsAppleMusic } from "react-icons/bs";
-  
+
 type Platform = "deezer" | "youtube" | "apple" | "soundcloud";
 
 type TransferModalProps = {
@@ -150,7 +150,17 @@ export default function TransferModal({
             onClick={handleConfirm}
             className="flex-1 bg-black border border-zinc-300 text-white  "
           >
-            Start transfer
+            {selectedPlatform
+              ? `Transfer to ${
+                  selectedPlatform === "deezer"
+                    ? "Deezer"
+                    : selectedPlatform === "youtube"
+                      ? "YouTube Music"
+                      : selectedPlatform === "soundcloud"
+                        ? "SoundCloud"
+                        : "Apple Music"
+                }`
+              : "Select a destination"}
           </Button>
         </DialogFooter>
       </DialogContent>
