@@ -11,7 +11,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FaSpotify } from "react-icons/fa";
+// import { FaSpotify } from "react-icons/fa";
 import { FaCircleCheck } from "react-icons/fa6";
 import { BsAppleMusic } from "react-icons/bs";
 
@@ -59,20 +59,19 @@ export default function TransferModal({
         <div className="space-y-2 py-2">
           {/* apple music */}
           <button
-            onClick={() => setSelectedPlatform("apple")}
-            className={`w-full flex items-center gap-3 p-4 rounded-xl border transition-all ${
-              selectedPlatform === "apple"
-                ? "border-zinc-900 bg-zinc-50"
-                : "border-zinc-200 hover:border-zinc-300 hover:bg-zinc-50"
-            }`}
+            // onClick={() => setSelectedPlatform("apple")}
+            className="w-full flex items-center gap-3 p-4 rounded-xl border border-zinc-100 cursor-not-allowed"
           >
             <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center flex-shrink-0">
               <BsAppleMusic className="text-red-400 w-5 h-5" />
             </div>
             <div className="text-left flex-1">
-              <p className="text-sm font-medium text-zinc-900">Apple Music</p>
-              <p className="text-xs text-zinc-400">Transfer your playlists</p>
+              <p className="text-sm font-medium text-zinc-300">Apple Music</p>
+              <p className="text-xs text-zinc-300">Coming soon</p>
             </div>
+              <span className="text-xs bg-zinc-100 text-zinc-400 px-2 py-0.5 rounded-full flex-shrink-0">
+              Soon
+            </span>
             {selectedPlatform === "apple" && (
               <FaCircleCheck className="w-5 h-5 text-zinc-900 flex-shrink-0" />
             )}
@@ -96,18 +95,18 @@ export default function TransferModal({
           </button>
         </div>
 
-        <DialogFooter className="gap-2 sm:gap-2">
+        <DialogFooter className="gap-2 border-none sm:gap-2">
           <Button
             variant="outline"
             onClick={() => onOpenChange(false)}
-            className="flex-1 text-white"
+            className="flex-1 text-black border-zinc-300 hover:bg-zinc-50 "
           >
             Cancel
           </Button>
           <Button
             disabled={!selectedPlatform}
             onClick={handleConfirm}
-            className="flex-1 bg-white border border-zinc-300 text-zinc-900 hover:bg-zinc-800 hover:text-white"
+            className="flex-1 bg-black border border-zinc-300 text-white  "
           >
             Start transfer
           </Button>

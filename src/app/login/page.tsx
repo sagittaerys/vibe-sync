@@ -3,6 +3,10 @@
 import { useState } from "react";
 import { FaSpotify } from "react-icons/fa";
 import { BsAppleMusic } from "react-icons/bs";
+import { FaDeezer } from "react-icons/fa6";
+import { FaSoundcloud } from "react-icons/fa6";
+import { FaYoutube } from "react-icons/fa";
+
 import Link from "next/link";
 import { authClient } from "@/src/lib/auth-client";
 
@@ -21,35 +25,49 @@ export default function LoginPage() {
     <div className="min-h-screen bg-white flex">
       {/* left panel — branding */}
       <div className="hidden lg:flex w-1/2 bg-zinc-950 flex-col justify-between p-12">
-        <Link href="/" className="text-white font-serif font-semibold tracking-tight">
+        <Link
+          href="/"
+          className="text-white font-serif font-semibold tracking-tight"
+        >
           VibeSync
         </Link>
 
         <div>
-          <h1
-            className="text-5xl font-bold text-white leading-[1.1] tracking-tight font-serif"
-          >
+          <h1 className="text-5xl font-bold text-white leading-[1.1] tracking-tight font-serif">
             Move your music.
             <br />
             <span className="text-zinc-400 font-serif">Keep your taste.</span>
           </h1>
           <p className="text-zinc-500 mt-4 text-sm leading-relaxed max-w-xs">
-            Transfer playlists between Spotify and Apple Music — with AI that
-            finds every track.
+            Transfer playlists across Spotify, Apple Music, Deezer and more —
+            with AI that finds every track.
           </p>
         </div>
 
         {/* platform pills */}
         <div className="flex items-center gap-2">
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-white/10 rounded-full">
             <FaSpotify className="w-3.5 h-3.5 text-green-400" />
-            <span className="text-zinc-400 text-xs">Spotify</span>
+            <span className="text-zinc-900 text-xs">Spotify</span>
+          </div>
+
+          <div className="text-zinc-500 text-xs">↔</div>
+
+          <div className="flex items-center bg-white gap-2 px-3 py-1.5 border border-white/10 rounded-full">
+            <BsAppleMusic className="w-3.5 h-3.5 text-red-400" />
+            <span className="text-zinc-900 text-xs">Apple Music</span>
           </div>
           <div className="text-zinc-500 text-xs">↔</div>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full">
-            <BsAppleMusic className="w-3.5 h-3.5 text-red-400" />
-            <span className="text-zinc-400 text-xs">Apple Music</span>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-white border border-white/10 rounded-full">
+            <FaDeezer className="w-3.5 h-3.5 text-purple-400 " />
+            <span className="text-zinc-900 text-xs">Deezer</span>
+          </div>
+          <div className="text-zinc-500 text-xs">↔</div>
+
+          <div className="flex  bg-white items-center gap-2 px-3 py-1.5  border border-white/10 rounded-full">
+            <FaYoutube className="w-3.5 h-3.5 text-red-700 " />
+            <span className="text-zinc-900 text-xs">YouTube Music</span>
           </div>
         </div>
       </div>
@@ -81,6 +99,18 @@ export default function LoginPage() {
               <FaSpotify className="w-5  h-5 flex-shrink-0" />
               <span className="text-sm font-medium">
                 {loading ? "Connecting..." : "Continue with Spotify"}
+              </span>
+            </button>
+
+            {/* deezer */}
+            <button
+              disabled
+              className="w-full flex items-center gap-3 px-4 py-3.5 bg-white border border-zinc-200 text-zinc-300 rounded-xl cursor-not-allowed"
+            >
+              <FaDeezer className="w-5 h-5 flex-shrink-0" />
+              <span className="text-sm font-medium">Continue with Deezer</span>
+              <span className="ml-auto text-xs bg-zinc-100 text-zinc-400 px-2 py-0.5 rounded-full">
+                Soon
               </span>
             </button>
 
