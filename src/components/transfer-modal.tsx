@@ -9,8 +9,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/src/components/ui/dialog";
+import { Button } from "@/src/components/ui/button";
 import { FaDeezer } from "react-icons/fa6";
 import { FaSoundcloud } from "react-icons/fa6";
 import { FaCircleCheck } from "react-icons/fa6";
