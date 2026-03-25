@@ -171,14 +171,14 @@ const handleConfirm = async () => {
           <Button
             variant="outline"
             onClick={() => onOpenChange(false)}
-            className="flex-1 text-black border-zinc-300 hover:bg-zinc-50 "
+            className="flex-1 text-black py-2 border-zinc-300 hover:bg-zinc-50 "
           >
             Cancel
           </Button>
           <Button
             disabled={!selectedPlatform}
             onClick={handleConfirm}
-            className="flex-1 bg-black border border-zinc-300 text-white  "
+            className="flex-1 bg-black py-2 border border-zinc-300 text-white  "
           >
             {selectedPlatform
               ? `Transfer to ${
