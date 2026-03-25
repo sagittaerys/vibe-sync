@@ -107,11 +107,12 @@ export default function DashboardPage() {
           <div>
             <p className="text-white font-medium text-sm">Ready to transfer?</p>
             <p className="text-zinc-400 text-xs mt-0.5">
-              Move your playlists from Spotify to Apple Music
+              Move your playlists from Spotify to other platforms in just a few clicks
             </p>
           </div>
           <button
-            // onClick={() => setShowTransferModal(true)}
+            onClick={() => setShowTransferModal(true)}
+            disabled={selectedIds.length === 0}
             className="flex-shrink-0 px-4 py-2 bg-white text-zinc-500 text-sm font-medium rounded-xl cursor-pointer border border-white/10"
           >
             Transfer
@@ -290,8 +291,29 @@ export default function DashboardPage() {
         open={showTransferModal}
         onOpenChange={setShowTransferModal}
         playlistCount={selectedIds.length}
-        onConfirm={(platform) => {
-          console.log("Transfer to:", platform, selectedIds);
+        onConfirm={async (platform) => {
+          try {
+            const res = await fetch("/api/transfer/start", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                platform,
+                playlistIds: selectedIds,
+              }),
+            });
+
+            const data = await res.json();
+
+            if (!res.ok)
+              throw new Error(data.error || "Failed to start transfer");
+
+            router.push(`/transfer/${data.jobId}`);
+
+            clearIds();
+          } catch (err) {
+            console.error("Transfer error:", err);
+            alert("Something went wrong starting the transfer.");
+          }
         }}
       />
     </div>
